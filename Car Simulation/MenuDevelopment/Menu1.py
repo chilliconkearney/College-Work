@@ -1,4 +1,5 @@
 #!/usr/bin/env pybricks-micropython
+import time
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
                                  InfraredSensor, UltrasonicSensor, GyroSensor)
@@ -14,8 +15,11 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 
 # Create your objects here.
 ev3 = EV3Brick()
-
+screen = ev3.screen
 
 # Write your program here.
 
+screen.print("hello world")
+screen.draw_text(0,20,"This is a string")
 
+time.sleep(1)
