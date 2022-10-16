@@ -19,6 +19,31 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 
 # Subroutines
 
+def Run():
+    screen.clear()
+    screen.print("Run is running")
+    time.sleep(1)
+
+def Right():
+    screen.clear()
+    screen.print("Right is running")
+    time.sleep(1)
+
+def Left():
+    screen.clear()
+    screen.print("Left is running")
+    time.sleep(1)
+
+def IDLine():
+    screen.clear()
+    screen.print("IDLine is running")
+    time.sleep(1)
+
+def FindLine():
+    screen.clear()
+    screen.print("FindLine is running")
+    time.sleep(1)
+
 
 # Create your objects here.
 ev3 = EV3Brick()
@@ -27,19 +52,26 @@ buttons = ev3.buttons
 
 # Write your program here.
 
-MainMenu = ["Main Menu","Item 1", "Item 2", "Item 3"]
+MainMenu = ["Run", "Right 90", "Left 90", "ID Line", "Find Line"]
+MainMenuLookUp = [Run]
 
 
 
-for i in range(len(MainMenu)):
-    screen.print(MainMenu[i])
+
+current_menu = MainMenu
+current_menuLookUp = MainMenuLookUp
+
 
 pointer = 0
 
 while True:
+    
+    # Output to screen
     screen.clear()
-    for i in range(len(MainMenu)):
-        screen.print(MainMenu[i])
+    for i in range(len(current_menu)):
+        screen.print(current_menu[i])
+    
+    # navigation
     
     if Button.DOWN in buttons.pressed():
         pointer+=1
@@ -48,7 +80,18 @@ while True:
     if Button.UP in buttons.pressed():
         pointer-=1
         time.sleep(0.3)
-    
+
+
+    if Button.CENTER in buttons.pressed():
+        try:
+            current_menuLookUp[pointer]()   
+        
+        
+        except:
+            pass
+
+
+
     screen.draw_text(100,22+22*pointer,"<--")
 
     time.sleep(0.1)
