@@ -1,8 +1,6 @@
 #!/usr/bin/env pybricks-micropython
 
-
 #This is the Second menu prototype, which will include running subroutines from the menu
-
 
 import time
 from pybricks.hubs import EV3Brick
@@ -51,14 +49,10 @@ buttons = ev3.buttons
 # Write your program here.
 
 MainMenu = ["Main Menu","Run", "Left RIght", "ID Line", "Find Line"]
-MainMenuLookUp = [Run]
+MainMenuLookUp = [Run, LeftRight, IDLine, FindLine]
 
-
-
-
-current_menu = MainMenu
+current_menu = MainMenu # allows for the main loop to update which menu it uses
 current_menuLookUp = MainMenuLookUp
-
 
 pointer = 0
 
@@ -66,8 +60,16 @@ while True:
     
     # Output to screen
     screen.clear()
-    for i in range(1,len(current_menu)):
-        screen.print(current_menu[i])
+    for i in range(len(current_menu)):
+        if i != 0:
+            if pointer+1==i:
+                screen.print(current_menu[i]+" <--") # adds the cursor to the end of the text line
+            else:
+                screen.print(current_menu[i]) # prints all the other lines in the menu
+        if i == 0:
+            screen.print("")
+
+    screen.draw_text(75, 0, current_menu[0])
     
     # navigation
     
@@ -84,15 +86,7 @@ while True:
         try:
             current_menuLookUp[pointer]()   
         
-        
         except:
             pass
 
-
-
-    screen.draw_text(100,22+22*pointer,"<--")
-
     time.sleep(0.1)
-
-
-
