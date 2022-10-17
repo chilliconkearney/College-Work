@@ -24,12 +24,10 @@ def Run():
     screen.print("Run is running")
     time.sleep(1)
 
-def Right():
+def LeftRight():
     screen.clear()
     screen.print("Right is running")
     time.sleep(1)
-
-def Left():
     screen.clear()
     screen.print("Left is running")
     time.sleep(1)
@@ -52,7 +50,7 @@ buttons = ev3.buttons
 
 # Write your program here.
 
-MainMenu = ["Run", "Right 90", "Left 90", "ID Line", "Find Line"]
+MainMenu = ["Main Menu","Run", "Left RIght", "ID Line", "Find Line"]
 MainMenuLookUp = [Run]
 
 
@@ -68,7 +66,7 @@ while True:
     
     # Output to screen
     screen.clear()
-    for i in range(len(current_menu)):
+    for i in range(1,len(current_menu)):
         screen.print(current_menu[i])
     
     # navigation
