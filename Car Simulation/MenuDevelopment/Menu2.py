@@ -16,6 +16,7 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 # Click "Open user guide" on the EV3 extension tab for more information.
 
 # Subroutines
+# Hi, this is a test
 
 def Run():
     screen.clear()
