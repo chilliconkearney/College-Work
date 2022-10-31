@@ -20,20 +20,32 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 def Run():
     screen.clear()
     screen.print("Run is running")
+
+    car.straight(1000) # forwards 1000 mm
+
     time.sleep(1)
 
 def LeftRight():
     screen.clear()
+    
     screen.print("Right is running")
+    car.turn(90)
     time.sleep(1)
+    
     screen.clear()
+    
     screen.print("Left is running")
+    car.turn(-90)
     time.sleep(1)
 
 def IDLine():
     screen.clear()
     screen.print("IDLine is running")
-    time.sleep(1)
+
+    while colsense.color()!=Color.BLACK:
+        print(colsense.color())
+        time.sleep(0.001)
+    
 
 def FindLine():
     screen.clear()
@@ -46,6 +58,15 @@ ev3 = EV3Brick()
 screen = ev3.screen
 buttons = ev3.buttons
 
+motorA = Motor(Port.A)
+motorD = Motor(Port.D)
+
+car = DriveBase(motorD,motorA,31,190) # wheels have diameter of 31mm and a drivebase width of 190mm
+
+colsense = ColorSensor(Port.S4)
+
+sensorList = [colsense]
+
 # Write your program here.
 
 MainMenu = ["Main Menu","Run", "Left RIght", "ID Line", "Find Line"]
@@ -55,6 +76,8 @@ current_menu = MainMenu # allows for the main loop to update which menu it uses
 current_menuLookUp = MainMenuLookUp
 
 pointer = 0
+
+car.settings(straight_speed=200)
 
 while True:
     
@@ -86,7 +109,8 @@ while True:
         try:
             current_menuLookUp[pointer]()   
         
-        except:
-            pass
+        except Exception as e:
+            print(e)
+            time.sleep(1)
 
     time.sleep(0.1)
