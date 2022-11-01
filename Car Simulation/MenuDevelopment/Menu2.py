@@ -43,13 +43,16 @@ def IDLine():
     screen.print("IDLine is running")
 
     while colsense.color()!=Color.BLACK:
-        print(colsense.color())
+        screen.print(colsense.color())
         time.sleep(0.001)
     
 
 def FindLine():
     screen.clear()
     screen.print("FindLine is running")
+
+    
+
     time.sleep(1)
 
 
