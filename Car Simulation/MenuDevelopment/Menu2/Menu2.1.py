@@ -18,3 +18,8 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 
 ev3 = EV3Brick()
 
+class Menu(): # used for the different submenus in the UI
+    pass
+
+class Main(): # will hold the main section of the program. useful for dropping in different main loops
+    pass
