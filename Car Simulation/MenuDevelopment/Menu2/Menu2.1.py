@@ -46,6 +46,8 @@ class Main: # will hold the main section of the program. useful for dropping in 
         while self.active:
             screen.clear()
             currentMenu.draw(ev3.screen)
+
+            time.sleep(0.1)
         
 
         
