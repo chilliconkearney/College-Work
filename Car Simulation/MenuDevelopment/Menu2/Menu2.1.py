@@ -23,10 +23,10 @@ class Menu: # used for the different submenus in the UI
         self.subroutines = subroutines
 
     def draw(self, screen, pointer): # draws onto the ev3 screen
-        screen.draw_text(75, 0, self.name)
+        screen.draw_text(115, 5, self.name)
         screen.print("")
         for i in range(len(self.titles)):
-            if pointer+1 == i:
+            if pointer == i:
                 screen.print(self.titles[i]+" <--")
             else:
                 screen.print(self.titles[i])
@@ -37,7 +37,7 @@ class Main: # will hold the main section of the program. useful for dropping in 
 
     def runMain(self): # the main section of the code is here vvv
         Car = car()
-        MainMenu = Menu("main", ["Run meter", "Left Right", "ID Line", "Find Line"], [Car.RunM, Car.LeftRight, Car.IDLine, Car.Findline])
+        MainMenu = Menu("Main", ["Run meter", "Left Right", "ID Line", "Find Line"], [Car.RunM, Car.LeftRight, Car.IDLine, Car.Findline])
         currentMenu = MainMenu
         pointer = 0
 
