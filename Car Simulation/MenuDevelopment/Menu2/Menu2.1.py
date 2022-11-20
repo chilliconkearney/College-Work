@@ -71,6 +71,7 @@ class car:
         self.driver = DriveBase(self.motorD,self.motorA,31,190) # wheels have diameter of 31mm and a drivebase width of 190mm    
 
         self.colsense = ColorSensor(Port.S4)
+        self.driver.settings(straight_speed=200) # sets the cars speed to 200mm /s
 
     def RunM(self):
         self.screen.clear()
@@ -96,7 +97,9 @@ class car:
             time.sleep(0.001)
 
     def Findline(self):
-        pass
+        self.screen.clear()
+        self.screen.print("Finding Line")
+        time.sleep(1)
     
 
 MyMain = Main() # creates the main object
