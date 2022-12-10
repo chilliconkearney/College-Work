@@ -31,34 +31,6 @@ class Menu: # used for the different submenus in the UI
             else:
                 screen.print(self.titles[i])
 
-class Main: # will hold the main section of the program. useful for dropping in different main loops
-    def __init__(self) -> None:
-        self.active = True
-
-    def runMain(self): # the main section of the code is here vvv
-        Car = car()
-        MainMenu = Menu("Main", ["Run meter", "Left Right", "ID Line", "Find Line"], [Car.RunM, Car.LeftRight, Car.IDLine, Car.Findline])
-        currentMenu = MainMenu
-        pointer = 0
-
-        while self.active:
-            Car.screen.clear()
-            currentMenu.draw(Car.screen, pointer)
-
-            if Button.DOWN in Car.buttons.pressed():
-                pointer += 1
-                time.sleep(0.3)
-            if Button.UP in Car.buttons.pressed():
-                pointer -= 1
-                time.sleep(0.3)
-            if Button.CENTER in Car.buttons.pressed():
-                try: # will try to run the subroutine in the current menu
-                    currentMenu.subroutines[pointer]()
-                except: 
-                    pass
-
-            time.sleep(0.1)
-        
 class car:
     def __init__(self):
         self.ev3 = EV3Brick()
@@ -100,6 +72,36 @@ class car:
         self.screen.clear()
         self.screen.print("Finding Line")
         time.sleep(1)
+
+class Main: # will hold the main section of the program. useful for dropping in different main loops
+    def __init__(self) -> None:
+        self.active = True
+
+    def runMain(self): # the main section of the code is here vvv
+        Car = car()
+        MainMenu = Menu("Main", ["Run meter", "Left Right", "ID Line", "Find Line"], [Car.RunM, Car.LeftRight, Car.IDLine, Car.Findline])
+        currentMenu = MainMenu
+        pointer = 0
+
+        while self.active:
+            Car.screen.clear()
+            currentMenu.draw(Car.screen, pointer)
+
+            if Button.DOWN in Car.buttons.pressed():
+                pointer += 1
+                time.sleep(0.3)
+            if Button.UP in Car.buttons.pressed():
+                pointer -= 1
+                time.sleep(0.3)
+            if Button.CENTER in Car.buttons.pressed():
+                try: # will try to run the subroutine in the current menu
+                    currentMenu.subroutines[pointer]()
+                except: 
+                    pass
+
+            time.sleep(0.1)
+        
+
     
 
 MyMain = Main() # creates the main object
