@@ -44,34 +44,39 @@ class car:
 
         self.colsense = ColorSensor(Port.S4)
         self.driver.settings(straight_speed=200) # sets the cars speed to 200mm /s
-
-    def RunM(self):
-        self.screen.clear()
-        self.screen.print("Run is running")
-
-        self.driver.straight(1000) # forwards 1000 mm
-
-        time.sleep(1)
     
-    def LeftRight(self):
+    def CalTurning(self):
         dirs = ["Right", "left"]
         for i in (0,1):
             self.screen.clear()
             print (dirs[i] + " is running")
             self.driver.turn(90-180*i)
 
-    def IDLine(self):
-        self.screen.clear()
-        self.screen.print("IDline is running")
-
-        while self.colsense.color() != Color.BLACK:
-            self.screen.print(self.colsense.color())
-            time.sleep(0.001)
-
-    def Findline(self):
         self.screen.clear()
         self.screen.print("Finding Line")
         time.sleep(1)
+
+    def CalTrackLine(self):
+        pass
+
+    def SetMotorSpeed(self):
+        pass
+
+    def SetLogType(self):
+        pass
+
+    def SetLogInterval(self):
+        pass
+
+    def RunAll(self):
+        pass
+
+    def RunSearch(self):
+        pass
+
+    def RunSolved(self):
+        pass
+
 
 class Main: # will hold the main section of the program. useful for dropping in different main loops
     def __init__(self) -> None:
@@ -79,7 +84,10 @@ class Main: # will hold the main section of the program. useful for dropping in 
 
     def runMain(self): # the main section of the code is here vvv
         Car = car()
-        MainMenu = Menu("Main", ["Run meter", "Left Right", "ID Line", "Find Line"], [Car.RunM, Car.LeftRight, Car.IDLine, Car.Findline])
+        MainMenu = Menu("Main", ["Run Menu", "Calibration Menu", "Settings Menu", "Quit"], [RunMenu, CalMenu, SetMenu, self.Exit])
+        RunMenu = Menu("Run", ["Run All", "Run Search", "Run Solve", "Main Menu"], [Car.RunAll, Car.RunSearch, Car.RunSolved, MainMenu])
+        CalMenu = Menu("Calibration", ["Track Line", "Turning", "Main Menu"], [Car.CalTrackLine, Car.CalTurning, MainMenu])
+        SetMenu = Menu("Settings", ["Motor Speed", "Logging Type", "Logging Intervals", "Main Menu"], [Car.SetMotorSpeed, Car.SetLogType, Car.SetLogInterval, MainMenu])
         currentMenu = MainMenu
         pointer = 0
 
@@ -95,14 +103,22 @@ class Main: # will hold the main section of the program. useful for dropping in 
                 time.sleep(0.3)
             if Button.CENTER in Car.buttons.pressed():
                 try: # will try to run the subroutine in the current menu
-                    currentMenu.subroutines[pointer]()
+                    if isinstance(currentMenu[pointer], Menu):
+                        Car.screen.clear()
+                        currentMenu.draw(Car.screen, pointer)
+                        time.sleep(1)
+                    
+                    
                 except: 
                     pass
 
             time.sleep(0.1)
+
+        # close the log file here
+        quit()
+
+    def Exit(self):
+        self.active = False
         
-
-    
-
 MyMain = Main() # creates the main object
 MyMain.runMain() # runs the main section of the code
