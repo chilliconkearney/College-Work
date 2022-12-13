@@ -4,6 +4,7 @@
 #This version will include the OOP approach
 
 # Imports
+import sys
 import time
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
@@ -42,7 +43,7 @@ class car:
 
         self.driver = DriveBase(self.motorD,self.motorA,31,190) # wheels have diameter of 31mm and a drivebase width of 190mm    
 
-        #self.colsense = ColorSensor(Port.S4) # Left out as wont work right now, FIX THIS!!!!!
+        self.colsense = ColorSensor(Port.S4) # Left out as wont work right now, FIX THIS!!!!!
         self.driver.settings(straight_speed=200) # sets the cars speed to 200mm /s
     
     def CalTurning(self):
@@ -76,7 +77,6 @@ class car:
 
     def RunSolved(self):
         print("running solved")
-
 
 class Main: # will hold the main section of the program. useful for dropping in different main loops
     def __init__(self) -> None:
@@ -116,7 +116,6 @@ class Main: # will hold the main section of the program. useful for dropping in 
                     else:
                         currentMenu.subroutines[pointer]()
                     
-                    
                 except Exception as e: 
                     print("hmmm, this didnt work")
                     print("here is why:", e)
@@ -124,10 +123,13 @@ class Main: # will hold the main section of the program. useful for dropping in 
             time.sleep(0.1)
 
         # close the log file here
-        quit()
+        Car.screen.clear()
+        Car.screen.print("Shutting Down...")
 
     def Exit(self):
         self.active = False
         
+
 MyMain = Main() # creates the main object
-MyMain.runMain() # runs the main section of the code
+#MyMain.runMain() # runs the main section of the code
+print("this has stopped")
