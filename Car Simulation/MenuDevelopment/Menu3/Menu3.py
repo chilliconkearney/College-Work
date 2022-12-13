@@ -109,7 +109,7 @@ class Main: # will hold the main section of the program. useful for dropping in 
                 time.sleep(0.3)
             if Button.CENTER in Car.buttons.pressed():
                 try: # will try to run the subroutine in the current menu
-                    if isinstance( currentMenu.subroutines[pointer],Menu):
+                    if isinstance(currentMenu.subroutines[pointer],Menu):
                         currentMenu = currentMenu.subroutines[pointer]
                         pointer = 0
 
