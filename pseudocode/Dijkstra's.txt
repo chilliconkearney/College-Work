@@ -1,0 +1,14 @@
+SUB Dijkstras(Graph)
+
+    Visited = []
+    Unvisited = []
+
+    Visited[0] = Graph.List[0] # adds the first vertex to the visited list
+
+    FOR i=1 to Graph.List.Length
+
+        
+
+    END FOR
+
+END SUB
