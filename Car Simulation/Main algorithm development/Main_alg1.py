@@ -5,6 +5,7 @@
 
 # Imports
 import time
+import math
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
                              InfraredSensor, UltrasonicSensor, GyroSensor)
@@ -26,22 +27,24 @@ class Graph: # will hold all the vertices and operations of the graph
     def add_vertex(self):
         pass
 
+    def sort_queue(self):
+        pass
+
 class vertex: # the base class of the vertex
-    def __init__(self, type = 1, label = "graph vertex", order = 1):
-        if type == 0:
-            self.__type__ = 0
-            self.label = "start vertex"
-            order = 0
-        
-        elif type == 2:
-            self.__type__ = 2
-            self.label = "end vertex"
+    def __init__(self, label, dir0:list, dir1:list, dir2:list, dir3:list, type =1):
+        self.label = label
+        self.adjlabels = [dir0[0], dir1[0],dir2[0],dir3[0]]
+        self.adjweights = [dir0[1], dir1[1],dir2[1],dir3[1]]
+        if type ==0:
+            self.currentcost = 0
+            self.previouslabel = self.label
 
-        else:
-            self.__type__ = type
-            self.label = label
+        elif type == 1:
+            self.currentcost = math.inf
+            self.previouslabel = None
 
-        self.order = order  
+        self.visited = False
+        self.permacost = 0
 
 class Menu: # used for the different submenus in the UI
     def __init__(self, name, titlesList:list, subroutines:list) -> None:
