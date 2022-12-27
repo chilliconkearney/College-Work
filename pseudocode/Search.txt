@@ -1,0 +1,62 @@
+SUB Search()
+
+    SUB CheckLine(int start_point, int end_point) 
+
+        Increment = (end_point - start_point)/10
+
+        Car.TurnTo(start_point)
+
+        current_angle = start_point
+
+		DO WHILE current_angle < end_point:
+
+		    Car.turn(increment)
+
+		    IF ColourSensor.Colour() == "Black" THEN
+
+			    RETURN TRUE
+
+		    END IF
+
+		END WHILE
+
+	    RETURN FALSE
+	
+    END SUB 
+
+    Car.State = "Searching"
+
+    DO WHILE Car.State == "Searching"
+
+        Car.Forward()
+
+        IF CheckLine(0,0) THEN # if the line is straight ahead
+
+            PASS
+
+        ELSE IF CheckLine(-45,45) THEN # if the line is roughly ahead
+
+            PASS
+
+        ELSE IF CheckLine(45, 135) THEN
+            
+            Car.Graph.AddVertex()
+            Car.Graph.Vertex.PathD2 = TRUE
+            Car.Graph.Vertex.PathD1 = TRUE # adds a right arc to the vertex
+
+        ELSE IF CheckLine(-135, -45) THEN
+            
+            Car.Graph.AddVertex()
+            Car.Graph.Vertex.PathD2 = TRUE # adds a backwards arc to the vertex
+            Car.Graph.Vertex.PathD3 = TRUE # adds a left arc to the vertex
+
+        ELSE IF CheckLine(135, -135) THEN
+            
+            Car.Graph.AddVertex()
+            Car.Graph.Vertex.PathD2 = TRUE # adds a backwards arc to the vertex
+
+        END IF
+
+    END WHILE
+
+END SUB
