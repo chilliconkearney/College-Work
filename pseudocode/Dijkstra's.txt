@@ -3,12 +3,39 @@ SUB Dijkstras(Graph)
     Visited = []
     Unvisited = []
 
-    Visited[0] = Graph.List[0] # adds the first vertex to the visited list
-
+    Unvisited[0] = Graph.List[0] # adds the first vertex to the unvisited list
+    Unvisited[0].Cost = 0
+    
     FOR i=1 to Graph.List.Length
 
-        
+        Unvisited[i] = Graph.List[i]
+        Unvisited[i].Cost = Math.inf # sets the verticies cost from start to infinity
 
     END FOR
+
+    DO WHILE EndVertex.perm = FALSE
+
+        unvisited[0].perm = TRUE # makes the current Vertex permanent
+        currentVertex = Unvisited[0]
+        
+        dir = 0
+
+        DO WHILE dir < 4
+
+            IF currentVertex.dirList[dir].cost > currentVertex.cost + currentVertex.dirCostList[dir] THEN
+
+                currentVertex.dirList[dir].cost = currentVertex.cost + currentVertex.dirCostList[dir]
+
+                FOR EACH item in 
+
+            END IF
+
+        END WHILE
+
+    END WHILE
+
+    # Return the final path taken to get to the end
+
+
 
 END SUB
