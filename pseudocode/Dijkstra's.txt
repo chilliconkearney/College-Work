@@ -5,6 +5,7 @@ SUB Dijkstras(Graph)
 
     Unvisited[0] = Graph.List[0] # adds the first vertex to the unvisited list
     Unvisited[0].Cost = 0
+    start = Unvisited[0]
     
     FOR i=1 to Graph.List.Length
 
@@ -13,29 +14,53 @@ SUB Dijkstras(Graph)
 
     END FOR
 
-    DO WHILE EndVertex.perm = FALSE
+    DO WHILE Unvisited.Empty = FALSE
 
-        unvisited[0].perm = TRUE # makes the current Vertex permanent
+        Unvisited[0].perm = TRUE # makes the current Vertex permanent
         currentVertex = Unvisited[0]
         
         dir = 0
 
-        DO WHILE dir < 4
+        DO WHILE dir < 4  # check each direction
 
             IF currentVertex.dirList[dir].cost > currentVertex.cost + currentVertex.dirCostList[dir] THEN
 
-                currentVertex.dirList[dir].cost = currentVertex.cost + currentVertex.dirCostList[dir]
+                FOR EACH item IN Unvisited
 
-                FOR EACH item in 
+                    IF item.label == currentVertex.dirList[dir].label THEN
+
+                        item.prev = currentVertex.label
+                        item.cost = currentVertex.cost + currentVertex.dirCostList[dir]
+
+                    END IF
+
+                END FOR
 
             END IF
 
-        END WHILE
+        END WHILE # end dir check
+
+        Visited.add(Unvisited[0])
+        Unvisited.delete(0)
+        
+        Main.Sort(Unvisited) # sort using bubble sort
 
     END WHILE
 
     # Return the final path taken to get to the end
 
+    path = []
+    
+    currentLabel = Graph.end.label
+    
 
+    DO WHILE currentLabel != start.label:
+        path.add(currentLabel)
+
+        FOR EACH item IN Unvisited
+            IF item.label = 
+        
+
+    END WHILE
 
 END SUB
