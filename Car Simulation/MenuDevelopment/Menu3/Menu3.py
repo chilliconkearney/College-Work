@@ -129,7 +129,5 @@ class Main: # will hold the main section of the program. useful for dropping in 
     def Exit(self):
         self.active = False
 
-
-
 MyMain = Main() # creates the main object
 #MyMain.runMain() # runs the main section of the code
