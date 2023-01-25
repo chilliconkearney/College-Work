@@ -5,6 +5,7 @@ class Vertex():
         self.label = str(label)
         self.adjacencyDict = {"Left":left, "Right":right, "Rear":rear, "Front":front} # dictionary of the adjacent verticies
         self.totalweight = 0
+        self.permanent = False
 
 
 class Graph():
@@ -21,7 +22,7 @@ class Graph():
     def Dijkstras(self):
         
         Queue = self.network
-        Visited = []
+        Permanent = []
         
         for i in range(1, len(self.network)): # setting up the initial values of the distance from the start node. 
             Queue[i].totalweight = math.inf   
@@ -36,4 +37,14 @@ class Graph():
                         queue[i], queue[i+1] = queue[i+1], queue[i] # swaps the two values round
                         swaps += 1
 
-            return queue # returns the sorted version of queue
+            return queue # returns the sorted version of queue 
+
+        while self.find_end_vertex(Queue).permanent != True: # the main loop which checks  all the vertices
+            pass
+
+    def find_end_vertex(Queue, end_label):
+        for item in Queue:
+            if item.label == end_label:
+                return item # returns the end label
+
+        return Queue[len(Queue)-2]  #  returns the final value of the queue   
