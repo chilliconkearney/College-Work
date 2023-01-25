@@ -27,7 +27,20 @@ class Graph():
         for i in range(1, len(self.network)): # setting up the initial values of the distance from the start node. 
             Queue[i].totalweight = math.inf   
         
-        def bubble(queue):
+        while self.find_end_vertex(Queue, self.end).permanent != True: # the main loop which checks  all the vertices
+            
+            current_vertex = Queue.pop[0] # similar to the dequeue in static languages
+            
+            
+        
+    def find_end_vertex(Queue, end_label):
+        for item in Queue:
+            if item.label == end_label:
+                return item # returns the end label
+
+        return Queue[len(Queue)-2]  #  returns the final value of the queue   
+
+    def bubble(queue):
             swaps = 1
             while swaps > 0:
                 swaps = 0
@@ -37,14 +50,4 @@ class Graph():
                         queue[i], queue[i+1] = queue[i+1], queue[i] # swaps the two values round
                         swaps += 1
 
-            return queue # returns the sorted version of queue 
-
-        while self.find_end_vertex(Queue).permanent != True: # the main loop which checks  all the vertices
-            pass
-
-    def find_end_vertex(Queue, end_label):
-        for item in Queue:
-            if item.label == end_label:
-                return item # returns the end label
-
-        return Queue[len(Queue)-2]  #  returns the final value of the queue   
+            return queue # returns the sorted version of queue
