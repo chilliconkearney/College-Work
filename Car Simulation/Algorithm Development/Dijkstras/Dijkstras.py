@@ -1,11 +1,40 @@
 import math
 
 class Vertex():
-    def __init__(self, label, left = [None,None], right = [None,None], rear = [None, None], front = [None, None]): # lists stored as [label, weight]
+    def __init__(self, label):
         self.label = str(label)
-        self.adjacencyDict = {"Left":left, "Right":right, "Rear":rear, "Front":front} # dictionary of the adjacent verticies
-        self.totalweight = 0
+        # left, right, rear, front
+        self.adjacencyLabels = ["","","",""] # dictionary of the adjacent verticies
+        self.adjacencyWeights = [math.inf, math.inf, math.inf, math.inf] # has all the connected arc weights set to infinity
+        self.totalweight = math.inf
         self.permanent = False
+
+    def update_adjacency(self, input = [[],[],[],[]]):
+        for i in range(0,4):
+            try:
+                if type(input[0][0]),type(input[0][1]) == str,float:
+                    pass
+        
+        
+        
+        
+        if type(left[0]) == str and type(left[1]) == float: # Left
+            self.adjacencyLabels[0] = left[0]
+            self.adjacencyWeights[0] = left[1]
+        
+        if type(left[0]) == str and type(left[1]) == float: # Right
+            self.adjacencyLabels[1] = right[0]
+            self.adjacencyWeights[1] = right[1]
+        
+        if type(left[0]) == str and type(left[1]) == float: # Rear
+            self.adjacencyLabels[1] = rear[0]
+            self.adjacencyWeights[1] = rear[1]
+        
+        if type(left[0]) == str and type(left[1]) == float: # Front
+            self.adjacencyLabels[1] = front[0]
+            self.adjacencyWeights[1] = front[1]
+            
+        
 
 
 class Graph():
@@ -14,9 +43,10 @@ class Graph():
         self.label_index = 65 # 65 in unicode is A
         self.end = end_label
 
-    def add_vertex(self, left = [None,None], right = [None,None], rear = [None, None], front = [None, None]):
-        Vert = Vertex(chr(self.label_index), left, right, rear, front)
-        self.network.append(Vert)
+    def add_vertex(self, left = [], right = [], rear = [], front = []):
+        Vert = Vertex(chr(self.label_index))
+        try:
+            self.network.append(Vert)
         self.label_index += 1
 
 
@@ -26,8 +56,7 @@ class Graph():
         Permanent = []
         dirList = ["Left", "Right", "Rear", "Front"]
         
-        for i in range(1, len(self.network)): # setting up the initial values of the distance from the start node. 
-            Queue[i].totalweight = math.inf   
+        Queue[0].totalweight = 0 # sets the initial vertex weight to 0
         
         while len(Queue) > 0: # the main loop which checks  all the vertices
             
@@ -46,11 +75,9 @@ class Graph():
             for i in range(0,4): # iterates from 0 to 3, stops when at 4
                 dirVertexLabel = current_vertex.adjacencyDict[dirList[i]][0] # finds the vertex in the direction
 
-                try:
-                    if self.find_vertex(Queue, dirVertexLabel).totalweight > current_vertex.totalweight + current_vertex.adjacencyDict[dirList[i]][1]:
+                if self.find_vertex(Queue, dirVertexLabel).totalweight > current_vertex.totalweight + current_vertex.adjacencyDict[dirList[i]][1]:
                         self.find_vertex(Queue, dirVertexLabel).totalweight = current_vertex.totalweight + current_vertex.adjacencyDict[dirList[i]][1]
-                except Exception as e:
-                    print(e)
+
    
         
         # Output the final path to follow
@@ -78,7 +105,7 @@ class Graph():
                 print(thing.label)
             input()
 
-    def bubble(self, queue):
+    def bubble(self, queue): # sorts the vertices by weight from start
             swaps = 1
             while swaps > 0:
                 swaps = 0
@@ -91,14 +118,7 @@ class Graph():
             return queue # returns the sorted version of queue
 
 
-myNetwork = Graph("D")
+Test = Vertex("T")
+Test.update_adjacency(left=["A", 8.0])
 
-myNetwork.add_vertex(right=["B", 4]) # A
-myNetwork.add_vertex(left=["A", 4], rear=["C", 4]) # B
-myNetwork.add_vertex(front=["B", 4], right=["E", 4], rear=["D", 4]) # C
-myNetwork.add_vertex(front=["C", 4]) # D
-myNetwork.add_vertex(left=["C", 4]) # E
-
-
-myNetwork.Dijkstras()
 input()
