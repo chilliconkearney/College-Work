@@ -59,10 +59,9 @@ class car():
         self.motorD = Motor(Port.D)
 
         self.driver = DriveBase(self.motorD,self.motorA,31,190) # wheels have diameter of 31mm and a drivebase width of 190mm    
-
+        
         self.colsense = ColorSensor(Port.S4) # Left out as wont work right now, FIX THIS!!!!!
         self.driver.settings(straight_speed=200) # sets the cars speed to 200mm /s
-
         self.maze = Graph()
 
     def Search(self):
@@ -72,6 +71,8 @@ class car():
         while self.colsense.color() != "Blue":
             time.sleep(0.1)
             
+            dir_offset = 0
+
             self.driver.drive(200,0) # sets the motors to drive forward
             
             if self.colsense.color() == "Red": # go straight ahead
@@ -81,7 +82,10 @@ class car():
                 pass
             
             elif self.check_line(45,135): # within the 90* to the right
-                self.maze.add_vertex(Left=[])
+                self.maze.add_vertex(Left=[chr(self.maze.label_index), self.driver.distance])
+                self.driver.reset()
+
+                dir_offset += 1 # increments the direction offset
 
             elif self.check_line(-135, -45):
                 self.maze.add_vertex()
