@@ -66,28 +66,38 @@ class car():
         self.maze = Graph()
 
     def Search(self):
-        self.driver.drive(200,0)
-        if self.colsense.color() == "Black":
-            pass
-        elif self.check_line(-45,45):
-            pass
-        elif self.check_line(45,135):
-            self.maze.add_vertex()
+        
+        self.maze.add_vertex() # creates the initial vertex
 
-        elif self.check_line(-135, -45):
-            self.maze.add_vertex()
+        while self.colsense.color() != "Blue":
+            time.sleep(0.1)
+            
+            self.driver.drive(200,0) # sets the motors to drive forward
+            
+            if self.colsense.color() == "Red": # go straight ahead
+                pass
+            
+            elif self.check_line(-45,45): # within 90* ahead
+                pass
+            
+            elif self.check_line(45,135): # within the 90* to the right
+                self.maze.add_vertex(Left=[])
 
-        elif self.check_line(135,-135):
-            self.maze.add_vertex()
+            elif self.check_line(-135, -45):
+                self.maze.add_vertex()
+
+            elif self.check_line(135,-135):
+                self.maze.add_vertex()
             
 
     def check_line(self, start_point, end_point):
+        self.driver.drive(0,0) # stops the motors
         x = (end_point-start_point)/10
         self.driver.turn(self.driver.angle - start_point)
 
         while self.driver.angle < end_point:
             self.driver.turn(x)
-            if self.colsense() == "Black":
+            if self.colsense() == "Red":
                 return True
 
         return False
