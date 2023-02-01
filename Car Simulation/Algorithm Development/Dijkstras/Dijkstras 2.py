@@ -61,7 +61,7 @@ class Graph():
         # Output the final path to follow
         print(self.findPath(Permanent, self.end))
 
-    def findPath(self, final_list, curlabel, output = ""):
+    def findPath(self, final_list, curlabel, output = ""): # traces the path back to the start
         dirList = ["Left", "Right", "Rear", "Front"]
         curVertex = self.find_vertex(final_list, curlabel)
         output += "\n\nlabel: {},\nweight: {},\ndir: {}".format(curVertex.label, curVertex.totalweight, dirList[curVertex.previousDir])
