@@ -14,7 +14,8 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 # This program requires LEGO EV3 MicroPython v2.0 or higher.
 # Click "Open user guide" on the EV3 extension tab for more information.
 
-import math
+class math: # allows me add math functions to class, and easily replace math.inf
+    inf = float("inf")
 
 class Vertex():
     def __init__(self, label):
@@ -62,7 +63,7 @@ class car():
         
         self.colsense = ColorSensor(Port.S4) # Left out as wont work right now, FIX THIS!!!!!
         self.driver.settings(straight_speed=200) # sets the cars speed to 200mm /s
-        self.maze = Graph()
+        self.maze = Graph("Z")
 
     def Search(self):
         
@@ -111,3 +112,4 @@ class car():
 
 Car = car()
 
+Car.Search()
