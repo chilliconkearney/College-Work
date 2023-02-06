@@ -79,36 +79,49 @@ class car():
             if self.colsense.color() == Color.RED: # go straight ahead
                 print("running")
             
-            elif self.check_line(-45,45): # within 90* ahead
-                pass
+            if self.colsense.color() != Color.RED:
+                
+                self.driver.drive(0,0)
+                self.driver.turn(-30)
+                rel_angle = -30
+                while rel_angle<30:
+                    self.driver.turn(10)
+                    if self.colsense.color() == Color.RED:
+                        break
+                    rel_angle += 10
+                self.driver.turn(-30) 
+
+            if self.colsense.color() != Color.RED:
+                directions = self.check_line()
+                print(directions)
+                time.sleep(30)
+
             
-            elif self.check_line(45,135): # within the 90* to the right
-                self.maze.add_vertex(left=[chr(self.maze.label_index), self.driver.distance])
-                self.driver.reset()
 
-                dir_offset += 1 # increments the direction offset
-
-            elif self.check_line(-135, -45):
-                self.maze.add_vertex(right=[chr(self.maze.label_index), self.driver.distance])
-                self.driver.reset()
-
-                dir_offset -= 1
-
-            elif self.check_line(135,-135):
-                self.maze.add_vertex()
-            
-
-    def check_line(self, start_point, end_point):
+    def check_line(self):
+        self.maze.add_vertex(chr(self.maze.label_index))
         self.driver.drive(0,0) # stops the motors
-        x = (end_point-start_point)/10
-        self.driver.turn((self.driver.angle() - start_point))
+        rel_angle = 0
+        possible_dirs = []
+        
+        print("Checking Line")
 
-        while self.driver.angle() < end_point:
-            self.driver.turn(x)
-            if self.colsense.color() == Color.RED:
-                return True
+        while rel_angle<360:
+            
+            self.driver.turn(10)
 
-        return False
+            if rel_angle > 45 and rel_angle < 135 and "Right" not in possible_dirs and self.colsense.color() == Color.RED:
+                possible_dirs.append("Right") 
+            if rel_angle > 135 and rel_angle < 225 and "Back" not in possible_dirs and self.colsense.color() == Color.RED:
+                possible_dirs.append("Back")
+            if rel_angle > 225 and rel_angle < 360 and "Left" not in possible_dirs and self.colsense.color() == Color.RED:
+                possible_dirs.append("Left")
+            rel_angle+= 10
+
+        return possible_dirs
+            
+
+
 
 
 
