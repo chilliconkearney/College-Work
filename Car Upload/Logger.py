@@ -20,7 +20,6 @@ class Logger:
         
         self.object_increment = this_increment
         
-
         for item in objects:
             with open(str(this_increment) + " " + item.name, "wb") as Tomb:
                 pickle.dump(item, Tomb)
@@ -39,16 +38,9 @@ class Logger:
         if index == -1:
             pass
         elif index < -1:
-            text = "Log Index Does Not Exist"
-            
+            text = "Log Index Does Not Exist"            
         else:
             text = presets[index]
         
         with open(self.filename, "a") as writer:
             writer.write(lineStart + "[{}]".format(round(time.time() - self.init_time, 4)) + text + "\n")
-
-
-Lumberjack = Logger()
-Lumberjack.log("Text Here")
-Lumberjack.log(index = -2)
-Lumberjack.log(index=1)
