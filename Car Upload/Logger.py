@@ -7,7 +7,7 @@ class Logger:
         self.filename = "Log.txt"
         self.interval = 0.1
         self.init_time = time.time()
-        #self.log()
+        self.log(index=0)
         self.name = "Logger"
 
     def dump(self, objects): # dumps an object into a text file
@@ -30,25 +30,25 @@ class Logger:
         with open(str(index) + " " + searchName, "rb") as Tomb:
             return pickle.load(Tomb)
                 
-
-
-
-    def log(self, text="", index = -1): # used to log things. 
+    def log(self, text="", index = -1, lineStart = ""): # used to log things. 
         presets = ["Logger Initialised",
-                   "",
+                   "Graph Initialised",
                    "",
                    ""] # creates a list of presets that can be accessed using an index.
+
         if index == -1:
-            with open(self.filename, "a") as writer:
-                writer.write("[{}]".format(round(time.time() - self.init_time, 4)) + text + "\n")
-        
+            pass
+        elif index < -1:
+            text = "Log Index Does Not Exist"
+            
         else:
-            with open(self.filename, "a") as writer:
-                writer.write("[{}]".format(round(time.time() - self.init_time, 4)) + presets[index] + "\n")
+            text = presets[index]
+        
+        with open(self.filename, "a") as writer:
+            writer.write(lineStart + "[{}]".format(round(time.time() - self.init_time, 4)) + text + "\n")
 
 
 Lumberjack = Logger()
-Lumberjack.dump([Lumberjack])
-Lumberjack2 = Lumberjack.retrieve("Logger")
-Lumberjack.interval = 0.2
-print(Lumberjack2.interval)
+Lumberjack.log("Text Here")
+Lumberjack.log(index = -2)
+Lumberjack.log(index=1)
