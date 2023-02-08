@@ -1,33 +1,37 @@
 import pickle
 import time
+import os
 
 class Logger:
     def __init__(self) -> None:
         self.filename = "Log.txt"
         self.interval = 0.1
         self.init_time = time.time()
-        self.log()
+        #self.log()
+        self.name = "Logger"
 
     def dump(self, objects): # dumps an object into a text file
-        with open("Tomb.txt", "r") as Tomb:
-            try:
-                for line in Tomb: pass
-                last = line # saves the last line as last
+        #finding what increment is next and updating the file to store this increment. 
+        with open("increment.txt", "r") as openFile:
+            for line in openFile: pass
+            this_increment = int(line) + 1
+        with open("increment.txt", "w") as openFile:
+            openFile.write(str(this_increment))
+        
+        self.object_increment = this_increment
+        
 
-                prefix = int(list(last)[0])+1
-            except:
-                prefix = 1
-
-        with open("Tomb.txt", "a") as Tomb:
-            for item in objects:
-                Tomb.write(str(prefix) + " " + str(pickle.dumps(item)) + "\n")
+        for item in objects:
+            with open(str(this_increment) + " " + item.name, "wb") as Tomb:
+                pickle.dump(item, Tomb)
+                self.log("{} dumped".format(item.name))
 
     def retrieve(self, searchName, index=1): # retrieves an object from a text file
-        with open("Tomb.txt", "r") as Tomb:
-            for line in Tomb:
-                if searchName in line and index == line.split()[0]:
-                    
-                    return pickle.loads(line.split()[1])
+        with open(str(index) + " " + searchName, "rb") as Tomb:
+            return pickle.load(Tomb)
+                
+
+
 
     def log(self, text="", index = -1): # used to log things. 
         presets = ["Logger Initialised",
@@ -45,6 +49,6 @@ class Logger:
 
 Lumberjack = Logger()
 Lumberjack.dump([Lumberjack])
-Lumberjack.interval = 0.2
 Lumberjack2 = Lumberjack.retrieve("Logger")
+Lumberjack.interval = 0.2
 print(Lumberjack2.interval)
