@@ -84,7 +84,8 @@ class car:
 
         self.colsense = ColorSensor(Port.S4) # Left out as wont work right now, FIX THIS!!!!!
         self.driver.settings(straight_speed=200) # sets the cars speed to 200mm /s
-    
+       
+
     def CalTurning(self):
         dirs = ["Right", "left"]
         for i in (0,1):
@@ -172,8 +173,9 @@ class Main: # will hold the main section of the program. useful for dropping in 
         self.active = True
 
     def runMain(self): # the main section of the code is here vvv
-        LumberJack = Logger.Logger()
+        LumberJack = Logger.logger()
         Car = car()
+        LumberJack.log(index=2)
         MainMenu = Menu("Main", ["Run Menu", "Calibration Menu", "Settings Menu", "Quit"])
         RunMenu = Menu("Run", ["Run All", "Run Search", "Run Solve", "Main Menu"])
         CalMenu = Menu("Calibration", ["Track Line", "Turning", "Main Menu"])
