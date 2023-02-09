@@ -2,13 +2,13 @@ import pickle
 import time
 import os
 
-class Logger:
+class logger:
     def __init__(self) -> None:
         self.filename = "Log.txt"
         self.interval = 0.1
         self.init_time = time.time()
         self.log(index=0)
-        self.name = "Logger"
+        self.name = "logger"
 
     def dump(self, objects): # dumps an object into a text file
         #finding what increment is next and updating the file to store this increment. 

@@ -172,6 +172,7 @@ class Main: # will hold the main section of the program. useful for dropping in 
         self.active = True
 
     def runMain(self): # the main section of the code is here vvv
+        LumberJack = Logger.Logger()
         Car = car()
         MainMenu = Menu("Main", ["Run Menu", "Calibration Menu", "Settings Menu", "Quit"])
         RunMenu = Menu("Run", ["Run All", "Run Search", "Run Solve", "Main Menu"])
