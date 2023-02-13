@@ -49,7 +49,6 @@ class Graph():
                         self.find_vertex(Queue, dirVertexLabel).totalweight = current_vertex.totalweight + current_vertex.adjacencyDict[dirList[i]][1]
                 except Exception as e:
                     print(e)
-                    input()
    
         
         # Output the final path to follow
@@ -73,7 +72,7 @@ class Graph():
             print(label)
             for thing in Queue:
                 print(thing.label)
-            input()
+
 
     def bubble(self, queue):
             swaps = 1
@@ -96,4 +95,4 @@ myNetwork.add_vertex(front=["C", 4]) # D
 myNetwork.add_vertex(left=["C", 4]) # E
 
 myNetwork.Dijkstras()
-input()
+
