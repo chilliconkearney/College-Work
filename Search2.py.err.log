@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/robot/Search/Search2.py", line 137, in <module>
+  File "/home/robot/Search/Search2.py", line 88, in Search
+  File "/home/robot/Search/Search2.py", line 130, in turnBase
+  File "pybricks/ev3devices.py", line 19, in stop
+OSError: [Errno 1] EPERM: 
+
+The requested operation is not valid in the current state:
+--> Check the documentation to for required conditions.
+--> Check the line in your script that matches
+    the line number given in the 'Traceback' above.
+
+
