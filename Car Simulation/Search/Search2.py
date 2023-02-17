@@ -99,7 +99,6 @@ class car():
                 
                 self.driver.turn(-30)
                 directions = self.check_line()
-                directions = ["Left", "Back"]
                 self.screen.print(directions)
 
                 self.driver.straight(50)
