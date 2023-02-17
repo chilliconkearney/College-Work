@@ -67,9 +67,13 @@ class car():
 
     def Search(self):
         
+        self.screen.print("searching,\n {}".format(self.colsense.color()))
+
         self.maze.add_vertex() # creates the initial vertex
 
-        while self.colsense.color() != Color.BLUE:
+
+
+        while self.colsense.color() != Color.GREEN:
             time.sleep(0.1)
             
             dir_offset = 0
@@ -77,9 +81,9 @@ class car():
             self.driver.drive(200,0) # sets the motors to drive forward
             
             if self.colsense.color() == Color.RED: # go straight ahead
-                self.screen.print("Running")
+                pass
             
-            if self.colsense.color() != Color.RED:
+            if self.colsense.color() != Color.RED: # re-adjust to find the line
                 
                 self.driver.drive(0,0)
                 self.driver.turn(-30)
@@ -91,11 +95,26 @@ class car():
                     rel_angle += 10
                  
 
-            if self.colsense.color() != Color.RED:
+            if self.colsense.color() != Color.RED: # find out which directions are possible to turn. 
+                
                 self.driver.turn(-30)
                 directions = self.check_line()
+                directions = ["Left", "Back"]
                 self.screen.print(directions)
-                time.sleep(30)
+
+                self.driver.straight(50)
+
+
+                self.driver.drive(0,0)
+                if "Left" in directions:
+                    self.driver.turn(-90)
+                elif "Right" in directions:
+                    self.driver.turn(90)
+                elif "Back" in directions:
+                    self.driver.turn(180)
+
+        self.screen.print("Out side loop")
+            
 
             
 
@@ -104,10 +123,8 @@ class car():
         self.driver.drive(0,0) # stops the motors
         rel_angle = 0
         possible_dirs = []
-        
-        print("Checking Line")
 
-        while rel_angle<360:
+        while rel_angle<330:
             
             self.driver.turn(10)
 
