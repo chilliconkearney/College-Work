@@ -1,5 +1,7 @@
 #!/usr/bin/env pybricks-micropython
 
+import Logger
+
 # Imports
 import sys
 import time
@@ -28,6 +30,8 @@ class Vertex():
         self.previousVertex = ""
         self.previousDir = 0
 
+        evLogger.log("Vertex Successfully Instantiated") # logs that a vertex is successfully made
+
     def update_adjacency(self, input = [[],[],[],[]]):
         for i in range(0,4):
             try:
@@ -35,7 +39,7 @@ class Vertex():
                     self.adjacencyLabels[i] = str(input[i][0])
                     self.adjacencyWeights[i] = int(input[i][1])
             except:
-                print("one of your values isn't the correct type")
+                evLogger.log("Incorrect Vertex Values Passed")
             
 class Graph():
     def __init__(self, end_label):
@@ -43,6 +47,8 @@ class Graph():
         self.label_index = 65 # 65 in unicode is A, works as an offset
         self.end = end_label
         self.nullVertex = Vertex("*")
+
+        evLogger.log("Graph Successfully Instantiated") # logs that the graph is successfully made
 
     def add_vertex(self, left = [], right = [], rear = [], front = []):
         Vert = Vertex(chr(self.label_index))
@@ -55,6 +61,7 @@ class car():
         self.ev3 = EV3Brick()
         self.screen = self.ev3.screen
         self.buttons = self.ev3.buttons
+        self.speaker = self.ev3.speaker
 
         self.motorA = Motor(Port.A)
         self.motorD = Motor(Port.D)
@@ -64,14 +71,13 @@ class car():
         self.colsense = ColorSensor(Port.S4) # Left out as wont work right now, FIX THIS!!!!!
         self.driver.settings(straight_speed=200) # sets the cars speed to 200mm /s
         self.maze = Graph("Z")
+        evLogger.log("Car Successfully Instantiated") # logs that the car object is successfully made
 
     def Search(self):
         
-        self.screen.print("searching,\n {}".format(self.colsense.color()))
+        evLogger.log("Starting Search")
 
         self.maze.add_vertex() # creates the initial vertex
-
-
 
         while self.colsense.color() != Color.GREEN:
             time.sleep(0.1)
@@ -84,14 +90,17 @@ class car():
                 pass
             
             if self.colsense.color() != Color.RED: # re-adjust to find the line
-                
+                evLogger.log("Lost Line")
+
                 self.driver.drive(0,0)
                 self.driver.turn(-30)
                 rel_angle = -30
                 while rel_angle<30:
                     self.driver.turn(10)
                     if self.colsense.color() == Color.RED:
+                        evLogger.log("Found Line")
                         break
+
                     rel_angle += 10
                  
 
@@ -103,21 +112,25 @@ class car():
 
                 self.driver.straight(50)
 
-
                 self.driver.drive(0,0)
                 if "Left" in directions:
                     self.driver.turn(-90)
+                    evLogger.log("Found Corner")
+                    
                 elif "Right" in directions:
                     self.driver.turn(90)
+                    evLogger.log("Found Corner")
+                    
                 elif "Back" in directions:
                     self.driver.turn(180)
+                    evLogger.log("Found Dead End")
+                    
 
-        self.screen.print("Out side loop")
-            
-
-            
+        evLogger.log("Search Complete") # logs that the search algorithm is done. 
 
     def check_line(self): # finds which directions are possible to turn. 
+        evLogger.log("Check Line algorithm")
+        
         self.maze.add_vertex(chr(self.maze.label_index))
         self.driver.drive(0,0) # stops the motors
         rel_angle = 0
@@ -127,7 +140,7 @@ class car():
             
             self.driver.turn(10)
 
-            if rel_angle > 45 and rel_angle < 135 and "Right" not in possible_dirs and self.colsense.color() == Color.RED:
+            if rel_angle > 0 and rel_angle < 135 and "Right" not in possible_dirs and self.colsense.color() == Color.RED:
                 possible_dirs.append("Right") 
             if rel_angle > 135 and rel_angle < 225 and "Back" not in possible_dirs and self.colsense.color() == Color.RED:
                 possible_dirs.append("Back")
@@ -137,7 +150,7 @@ class car():
 
         return possible_dirs
             
-
+evLogger = Logger.logger("Search2Logs.txt")
 
 Car = car()
 

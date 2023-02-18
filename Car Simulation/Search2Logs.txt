@@ -1,0 +1,59 @@
+
+[0.01]Logger Initialised
+[0.37]Vertex Successfully Instantiated
+[0.38]Graph Successfully Instantiated
+[0.39]Car Successfully Instantiated
+[0.39]Starting Search
+[0.41]Vertex Successfully Instantiated
+[1.85]Lost Line
+[6.53]Check Line algorithm
+[6.54]Vertex Successfully Instantiated
+[6.55]Incorrect Vertex Values Passed
+[25.53]Found Corner
+[26.66]Lost Line
+[31.3]Check Line algorithm
+[31.31]Vertex Successfully Instantiated
+[31.32]Incorrect Vertex Values Passed
+[50.19]Found Corner
+[50.3]Lost Line
+[53.14]Found Line
+[54.08]Lost Line
+[56.40000000000001]Found Line
+[56.92]Lost Line
+[58.77000000000001]Found Line
+[59.39]Lost Line
+[63.97]Check Line algorithm
+[63.98]Vertex Successfully Instantiated
+[63.99000000000001]Incorrect Vertex Values Passed
+[82.57]Found Corner
+[83.09000000000001]Lost Line
+[87.79000000000002]Check Line algorithm
+[87.79999999999999]Vertex Successfully Instantiated
+[87.81000000000001]Incorrect Vertex Values Passed
+[107.47]Found Dead End
+[107.58]Lost Line
+[108.92]Found Line
+[109.84]Lost Line
+[112.71]Found Line
+[113.34]Lost Line
+[115.73]Found Line
+[116.15]Lost Line
+[118.47]Found Line
+[118.89]Lost Line
+[121.26]Found Line
+[121.57]Lost Line
+[123.93]Found Line
+[124.55]Lost Line
+[129.15]Check Line algorithm
+[129.17]Vertex Successfully Instantiated
+[129.18]Incorrect Vertex Values Passed
+[148.06]Found Corner
+[148.17]Lost Line
+[149.55]Found Line
+[150.06]Lost Line
+[151.4]Found Line
+[151.82]Lost Line
+[153.15]Found Line
+[153.77]Lost Line
+[155.65]Found Line
+[156.47]Lost Line
