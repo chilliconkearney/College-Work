@@ -131,7 +131,6 @@ class car():
     def check_line(self): # finds which directions are possible to turn. 
         evLogger.log("Check Line algorithm")
         
-        self.maze.add_vertex(chr(self.maze.label_index))
         self.driver.drive(0,0) # stops the motors
         rel_angle = 0
         possible_dirs = []
