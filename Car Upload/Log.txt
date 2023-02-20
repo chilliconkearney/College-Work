@@ -1,4 +1,0 @@
-[0.0]Logger Initialised
-[0.001]Text Here
-[0.001]Log Index Does Not Exist
-[0.002]Graph Initialised
