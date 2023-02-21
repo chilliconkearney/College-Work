@@ -16,67 +16,54 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 
 # This program requires LEGO EV3 MicroPython v2.0 or higher.
 # Click "Open user guide" on the EV3 extension tab for more information.
+class math: # allows me add math functions to class, and easily replace math.inf
+    inf = float("inf")
 
-class Menu: # used for the different submenus in the UI
-    def __init__(self, name, titlesList:list, subroutines=[]) -> None:
-        self.name = name
-        self.titles = titlesList 
-        self.subroutines = subroutines
+class Vertex():
+    def __init__(self, label):
+        self.label = str(label)
+        # left, right, rear, front
+        self.adjacencyLabels = ["","","",""] # dictionary of the adjacent verticies
+        self.adjacencyWeights = [math.inf, math.inf, math.inf, math.inf] # has all the connected arc weights set to infinity
+        self.totalweight = math.inf
+        self.permanent = False
+        self.previousVertex = ""
+        self.previousDir = 0
+        self.ObjectID = "vertex"
 
-    def draw(self, screen, pointer): # draws onto the ev3 screen
-        screen.draw_text(170-(len(self.name)*10), 5, self.name)
-        screen.print("")
-        for i in range(len(self.titles)):
-            if pointer == i:
-                screen.print(self.titles[i]+" <--")
-            else:
-                screen.print(self.titles[i])
+    def update_adjacency(self, input = [[],[],[],[]]):
+        for i in range(0,4):
+            try:
+                if len(input[i]) > 0:
+                    self.adjacencyLabels[i] = str(input[i][0])
+                    self.adjacencyWeights[i] = int(input[i][1])
+            except:
+                print("one of your values isn't the correct type")
+            
+class Graph():
+    def __init__(self, end_label):
+        self.network = []
+        self.label_index = 65 # 65 in unicode is A, works as an offset
+        self.end = end_label
+        self.nullVertex = Vertex("*")
+        self.route = ""
+        self.ObjectID = "graph"
 
-class car:
-    def __init__(self):
-        self.ev3 = EV3Brick()
-        self.screen = self.ev3.screen
-        self.buttons = self.ev3.buttons
-
-        self.motorA = Motor(Port.A)
-        self.motorD = Motor(Port.D)
-
-        self.driver = DriveBase(self.motorD,self.motorA,31,190) # wheels have diameter of 31mm and a drivebase width of 190mm    
-
-        self.colsense = ColorSensor(Port.S4) # Left out as wont work right now, FIX THIS!!!!!
-        self.driver.settings(straight_speed=200) # sets the cars speed to 200mm /s
-    
-    def CalTurning(self):
-        dirs = ["Right", "left"]
-        for i in (0,1):
-            self.screen.clear()
-            print (dirs[i] + " is running")
-            self.driver.turn(90-180*i)
-
-        self.screen.clear()
-        self.screen.print("Finding Line")
-        time.sleep(1)
-
-    def CalTrackLine(self):
-        print("Tracking Line")
-
-    def SetMotorSpeed(self):
-        print("settings motor speed")
-
-    def SetLogType(self):
-        print("setting log type")
-
-    def SetLogInterval(self):
-        print("setting log interval")
-
-    def RunAll(self):
-        print("running all")
-
-    def RunSearch(self):
-        print("running search")
-
-    def RunSolved(self):
-        print("running solved")
+    def __call__(self):
+        properties = []
+        properties.append(self.end)
+        return properties
+        
+    def build(properties):
+        print(len(properties))
+        this = Graph(properties[0])
+        return this
+        
+    def add_vertex(self, left = [], right = [], rear = [], front = []):
+        Vert = Vertex(chr(self.label_index))
+        Vert.update_adjacency([left,right,rear,front])
+        self.network.append(Vert)
+        self.label_index += 1 # increments the label by 1 e.g A -> B
 
     def Dijkstras(self):
         Queue = self.network
@@ -112,7 +99,7 @@ class car:
             return output
         else:
             return self.findPath(final_list,curVertex.previousVertex, output)
-        
+ 
     def find_vertex(self, Queue, label):
         if len(Queue)>0:
             for item in Queue:
@@ -132,11 +119,145 @@ class car:
 
             return queue # returns the sorted version of queue
 
+class Menu: # used for the different submenus in the UI
+    def __init__(self, name, titlesList:list, subroutines=[]) -> None:
+        self.name = name
+        self.titles = titlesList 
+        self.subroutines = subroutines
+        self.ObjectID = "menu"
 
+    def draw(self, screen, pointer): # draws onto the ev3 screen
+        screen.draw_text(170-(len(self.name)*10), 5, self.name)
+        screen.print("")
+        for i in range(len(self.titles)):
+            if pointer == i:
+                screen.print(self.titles[i]+" <--")
+            else:
+                screen.print(self.titles[i])
+
+class car:
+    def __init__(self):
+        self.ev3 = EV3Brick()
+        self.screen = self.ev3.screen
+        self.buttons = self.ev3.buttons
+
+        self.motorA = Motor(Port.A)
+        self.motorD = Motor(Port.D)
+
+        self.driver = DriveBase(self.motorD,self.motorA,31,190) # wheels have diameter of 31mm and a drivebase width of 190mm    
+
+        self.colsense = ColorSensor(Port.S4) # Left out as wont work right now, FIX THIS!!!!!
+        self.driver.settings(straight_speed=200) # sets the cars speed to 200mm /s
+
+        self.ObjectID = "car"
+    
+    def CalTurning(self):
+        dirs = ["Right", "left"]
+        for i in (0,1):
+            self.screen.clear()
+            print (dirs[i] + " is running")
+            self.driver.turn(90-180*i)
+
+        self.screen.clear()
+        self.screen.print("Finding Line")
+        time.sleep(1)
+
+    def CalTrackLine(self):
+        print("Tracking Line")
+
+    def SetMotorSpeed(self):
+        print("settings motor speed")
+
+    def SetLogType(self):
+        print("setting log type")
+
+    def SetLogInterval(self):
+        print("setting log interval")
+
+    def RunAll(self):
+        print("running all")
+
+    def RunSearch(self):
+        print("running search")
+
+    def RunSolved(self):
+        print("running solved")
+
+class logger:
+    def __init__(self, filename="Log.txt") -> None:
+        self.filename = filename
+        self.interval = 0.1
+        self.init_time = time.time()
+        self.log(index=0, lineStart="\n") # logs that it has initialised itself. 
+        self.ObjectID = "logger"
+
+    def __call__(self):
+        properties = []
+        properties.append(self.filename)
+        properties.append(str(self.interval))
+        properties.append(str(self.init_time))
+        properties.append(self.ObjectID)
+
+        return properties
+
+    def dump(self, *args): # dumps an object into a text file
+        #finding what increment is next and updating the file to store this increment. 
+        with open("increment.txt", "r") as openFile:
+            for line in openFile: pass
+            this_increment = int(line) + 1
+        with open("increment.txt", "w") as openFile:
+            openFile.write(str(this_increment))
+        
+        self.object_increment = this_increment
+        
+        for item in args:
+            with open(str(this_increment) + " " + item.ObjectID, "w") as Tomb:
+                
+                
+                for i in range(len(item())):
+                    if i == 0:
+                        Tomb.write("{}".format(item()[0]))
+                    else:
+                        Tomb.write("\n{}".format(item()[i]))
+                    i+=1
+
+                self.log("{} dumped".format(item.ObjectID))
+
+
+
+    def retrieve(self, searchName, object, index=1): # retrieves an object from a text file
+        with open(str(index) + " " + searchName, "r") as Tomb:
+            
+            properties = []
+
+            for line in Tomb.readlines():
+                properties.append(line.strip())
+            
+
+            return object.build(properties)
+
+
+
+    def log(self, text="", index = -1, lineStart = ""): # used to log things. 
+        presets = ["Logger Initialised",
+                   "Graph Initialised",
+                   "",
+                   ""] # creates a list of presets that can be accessed using an index.
+
+        if index == -1:
+            pass
+        elif index < -1:
+            text = "Log Index Does Not Exist"            
+        else:
+            text = presets[index]
+        
+        with open(self.filename, "a") as writer:
+            writer.write(lineStart + "[{}]".format(round(time.time() - self.init_time, 2)) + text + "\n")
 
 class Main: # will hold the main section of the program. useful for dropping in different main loops
     def __init__(self) -> None:
         self.active = True
+        self.ObjectID = "main"
 
     def runMain(self): # the main section of the code is here vvv
         Car = car()
@@ -184,6 +305,13 @@ class Main: # will hold the main section of the program. useful for dropping in 
 
     def Exit(self):
         self.active = False
+
+
+L1 = logger()
+G1 = Graph("Z")
+
+L1.dump(G1)
+print(L1.retrieve("graph", Graph, index=5).end)
 
 MyMain = Main() # creates the main object
 #MyMain.runMain() # runs the main section of the code

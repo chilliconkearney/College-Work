@@ -46,7 +46,11 @@ class logger:
     def retrieve(self, searchName, objName="", index=1): # retrieves an object from a text file
         with open(str(index) + " " + searchName, "r") as Tomb:
             
-            properties = Tomb.readlines()
+            properties = []
+
+            for line in Tomb.readlines():
+                properties.append(line.strip())
+            
 
             print(properties)
 
@@ -92,4 +96,4 @@ Lumber = logger()
 
 Lumber.dump(T1)
 
-Lumber.retrieve("Test", )
+Lumber.retrieve("Test", index=3)

@@ -24,3 +24,9 @@
 
 [0.0]Logger Initialised
 [0.0]Test dumped
+
+[0.0]Logger Initialised
+[0.0]Test dumped
+
+[0.0]Logger Initialised
+[0.0]Test dumped
