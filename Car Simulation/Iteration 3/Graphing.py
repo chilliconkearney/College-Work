@@ -35,7 +35,7 @@ class Vertex():
         pass
             
 class Graph():
-    def __init__(self, end_label, screen):
+    def __init__(self, end_label):
         self.network = []
         self.label_index = 65 # 65 in unicode is A, works as an offset
         self.end = end_label
@@ -43,7 +43,7 @@ class Graph():
         self.finalPath = ""
         self.finalLength = math.inf
         self.Permanent = []
-        self.screen = screen
+        
         
 
     def __call__(self):
@@ -89,19 +89,20 @@ class Graph():
     def Dijkstras(self):
         
         self.fixGraph()
-        self.screen.print("Graph Fixed")
-
+        
         Queue = []
         for item in self.network:
             Queue.append(item)
         
+        for item in Queue:
+            print("\n{}:### {}".format(item.label, item.adjacencyLabels))
         
         Queue[0].totalweight = 0 # sets the initial vertex weight to 0
         end_vertex = self.find_vertex(Queue, self.end)
 
         while end_vertex in Queue: # the main loop which checks all the vertices
             
-            self.screen.print("Doing Dijkstra's")
+            
             
             self.bubble(Queue) # sorts the queue
             
@@ -114,9 +115,9 @@ class Graph():
                 dirVertex = self.find_vertex(Queue,current_vertex.adjacencyLabels[i]) # finds the vertex in the direction
 
                 if dirVertex.totalweight > current_vertex.totalweight + current_vertex.adjacencyWeights[i]:
-                        dirVertex.totalweight = current_vertex.totalweight + current_vertex.adjacencyWeights[i]
-                        dirVertex.previousVertex = current_vertex.label
-                        dirVertex.previousDir = i
+                    dirVertex.totalweight = current_vertex.totalweight + current_vertex.adjacencyWeights[i]
+                    dirVertex.previousVertex = current_vertex.label
+                    dirVertex.previousDir = i
 
         # Output the final path to follow
         self.finalPath = self.findPath(self.Permanent, self.end)
@@ -125,7 +126,7 @@ class Graph():
     def findPath(self, final_list, curlabel, output = ""): # traces the path back to the start
         dirList = ["Left", "Right", "Rear", "Front"]
         curVertex = self.find_vertex(final_list, curlabel)
-        output += "{},{},{}".format(curVertex.label, curVertex.totalweight, dirList[curVertex.previousDir])
+        output += "\n{},{},{}".format(curVertex.label, curVertex.totalweight, dirList[curVertex.previousDir])
         if curVertex.label == "A":
             return output
         else:
@@ -155,23 +156,43 @@ class Graph():
             for vert_j in self.network:
                 for i in range(0,4):
                     if vert_i.label != vert_j.label and vert_i.adjacencyLabels[i] == vert_j.adjacencyLabels[i] and len(vert_j.adjacencyLabels[i])>0:
-                        self.screen.print("Changing Layout")
                         
-                        if vert_i.adjacencyWeights[i] > vert_j.adjacencyWeights[i]:
-                            firstVert = vert_i
-                            secondVert = vert_j
-                            thirdVert = self.find_vertex(self.network, firstVert.adjacencyLabels[i])
                         
-                        elif vert_i.adjacencyWeights[i] > vert_j.adjacencyWeights[i]:
+                        if vert_i.adjacencyWeights[i] <= vert_j.adjacencyWeights[i]:
                             firstVert = vert_j
                             secondVert = vert_i
                             thirdVert = self.find_vertex(self.network, firstVert.adjacencyLabels[i])
+                        
+                        elif vert_j.adjacencyWeights[i] <= vert_i.adjacencyWeights[i]:
+                            firstVert = vert_i
+                            secondVert = vert_j
+                            thirdVert = self.find_vertex(self.network, firstVert.adjacencyLabels[i])
+
+                        print(firstVert.label, secondVert.label, thirdVert.label)
 
                         firstVert.adjacencyLabels[i] = secondVert.label
                         firstVert.adjacencyWeights[i] = firstVert.adjacencyWeights[i] - secondVert.adjacencyWeights[i]
 
                         secondVert.adjacencyLabels[(i+2)%4] = firstVert.label
-                        secondVert.adjacencyLabels[(i+2)%4] = firstVert.adjacencyWeights[i]
+                        secondVert.adjacencyWeights[(i+2)%4] = firstVert.adjacencyWeights[i]
 
                         thirdVert.adjacencyLabels[(i+2)%4] = secondVert.label
                         thirdVert.adjacencyWeights[(i+2)%4] = secondVert.adjacencyWeights[i]
+
+G1 = Graph("G") 
+
+G1.add_vertex(0,0, [True,False,False,False])
+G1.add_vertex(0,4,[False,True,True,True])
+G1.add_vertex(-1,4,[False,True,False,False])
+G1.add_vertex(1,8,[True,False,False,True])
+G1.add_vertex(0,4,[False,True,True,True])
+G1.add_vertex(-1,4,[False,True,False,False])
+G1.add_vertex(1,8,[False,False,False,True])
+
+print(G1.Dijkstras())
+
+#print("\n\nnetwork values#################")
+
+#for item in G1.network:
+    #print("\n{},{},{}".format(item.label, item.previousVertex, item.totalweight))
+                    
