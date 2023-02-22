@@ -179,17 +179,17 @@ class Graph():
                         thirdVert.adjacencyLabels[(i+2)%4] = secondVert.label
                         thirdVert.adjacencyWeights[(i+2)%4] = secondVert.adjacencyWeights[i]
 
-G1 = Graph("G") 
+#G1 = Graph("G") 
 
-G1.add_vertex(0,0, [True,False,False,False])
-G1.add_vertex(0,4,[False,True,True,True])
-G1.add_vertex(-1,4,[False,True,False,False])
-G1.add_vertex(1,8,[True,False,False,True])
-G1.add_vertex(0,4,[False,True,True,True])
-G1.add_vertex(-1,4,[False,True,False,False])
-G1.add_vertex(1,8,[False,False,False,True])
+#G1.add_vertex(0,0, [True,False,False,False])
+#G1.add_vertex(0,4,[False,True,True,True])
+#G1.add_vertex(-1,4,[False,True,False,False])
+#G1.add_vertex(1,8,[True,False,False,True])
+#G1.add_vertex(0,4,[False,True,True,True])
+#G1.add_vertex(-1,4,[False,True,False,False])
+#G1.add_vertex(1,8,[False,False,False,True])
 
-print(G1.Dijkstras())
+#print(G1.Dijkstras())
 
 #print("\n\nnetwork values#################")
 
