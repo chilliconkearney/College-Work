@@ -4,7 +4,7 @@
 #This version will include the OOP approach
 
 # Imports
-import sys
+import os
 import time
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
@@ -96,8 +96,10 @@ class Main: # will hold the main section of the program. useful for dropping in 
         
         currentMenu = MainMenu
         pointer = 0
-
+        index  = 0
         while self.active:
+            #print(os.system("free"))
+            
             Car.screen.clear()
             currentMenu.draw(Car.screen, pointer)
 
@@ -120,6 +122,11 @@ class Main: # will hold the main section of the program. useful for dropping in 
                     print("hmmm, this didnt work")
                     print("here is why:", e)
 
+            if Button.RIGHT in Car.buttons.pressed():
+                
+                Car.ev3.screen.save("Screen {}".format(index))
+                index += 1
+            
             time.sleep(0.1)
 
         # close the log file here
@@ -130,4 +137,4 @@ class Main: # will hold the main section of the program. useful for dropping in 
         self.active = False
 
 MyMain = Main() # creates the main object
-#MyMain.runMain() # runs the main section of the code
+MyMain.runMain() # runs the main section of the code

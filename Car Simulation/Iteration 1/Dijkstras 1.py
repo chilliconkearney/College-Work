@@ -1,4 +1,5 @@
 import math
+import time
 
 class Vertex():
     def __init__(self, label, left = [None,None], right = [None,None], rear = [None, None], front = [None, None]): # lists stored as [label, weight]
@@ -86,6 +87,9 @@ class Graph():
 
             return queue # returns the sorted version of queue
 
+print("Start Time: {}".format(time.time()))
+start = time.time()
+
 myNetwork = Graph("D")
 
 myNetwork.add_vertex(right=["B", 4]) # A
@@ -96,3 +100,5 @@ myNetwork.add_vertex(left=["C", 4]) # E
 
 myNetwork.Dijkstras()
 
+print("End Time: {}".format(time.time()))
+print("This took {} seconds".format(time.time()-start))
