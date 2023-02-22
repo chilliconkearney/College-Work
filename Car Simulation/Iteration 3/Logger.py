@@ -8,6 +8,7 @@ class logger:
         self.init_time = time.time()
         self.log(index=0, lineStart="\n") # logs that it has initialised itself. 
         self.ObjectID = "logger"
+        self.loggingActive = True
 
     def __call__(self):
         properties = []
@@ -67,37 +68,6 @@ class logger:
         else:
             text = presets[index]
         
-        with open(self.filename, "a") as writer:
-            writer.write(lineStart + "[{}]".format(round(time.time() - self.init_time, 2)) + text + "\n")
-
-
-
-class test:
-    def __init__(self) -> None:
-        self.ObjectID = "Test"
-        self.age = 12
-        self.height = 185
-
-    def __call__(self):
-        properties = []
-        properties.append(self.ObjectID)
-        properties.append(str(self.age))
-        properties.append(str(self.height))
-        
-        return properties
-    
-    def build(properties):
-        T = test()
-        T.ObjectID = properties[0]
-        T.age = properties[1]
-        T.height = properties[2]
-
-        return T
-    
-T1 = test()
-
-Lumber = logger()
-
-Lumber.dump(T1)
-
-print
+        if self.loggingActive:
+            with open(self.filename, "a") as writer:
+                writer.write(lineStart + "[{}]".format(round(time.time() - self.init_time, 2)) + text + "\n")
