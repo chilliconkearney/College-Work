@@ -16,7 +16,7 @@ class Vertex():
     def update_adjacency(self, input = [[],[],[],[]]):
         for i in range(0,4):
             try:
-                if len(input[i]) > 0:
+                if len(input[i]) == 2:
                     self.adjacencyLabels[i] = str(input[i][0])
                     self.adjacencyWeights[i] = int(input[i][1])
             except:
@@ -30,6 +30,9 @@ class Vertex():
             properties.append("{},{}".format(self.adjacencyLabels[i], self.adjacencyWeights[i]))
 
         return properties
+    
+    def build():
+        pass
             
 class Graph():
     def __init__(self, end_label):
@@ -78,7 +81,7 @@ class Graph():
                 Vert.adjacencyPot = possibleDirs
 
             self.network.append(Vert)
-            self.label_index += 1 # increments the label by 1 e.g A -> B
+        self.label_index += 1 # increments the label by 1 e.g A -> B
 
     def Dijkstras(self):
         Queue = self.network
