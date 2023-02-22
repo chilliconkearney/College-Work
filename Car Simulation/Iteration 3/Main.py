@@ -7,7 +7,7 @@ import Logger
 import Graphing
 
 # Imports
-import sys
+import os
 import time
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
@@ -298,13 +298,14 @@ class main: # will hold the main section of the program. useful for dropping in 
                     
                 except Exception as e: 
                     print("hmmm, this didnt work")
-                    print("here is why:", e)
+                    evLogger.log(e)
 
             time.sleep(0.2)
 
         # close the log file here
         Car.screen.clear()
         Car.screen.print("Shutting Down...")
+        os.system("sudo shutdown -h now")
 
     def Exit(self):
         self.active = False

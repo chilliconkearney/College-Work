@@ -79,8 +79,6 @@ class Graph():
 
             self.network.append(Vert)
             self.label_index += 1 # increments the label by 1 e.g A -> B
-            
-
 
     def Dijkstras(self):
         Queue = self.network
@@ -138,10 +136,3 @@ class Graph():
             return queue # returns the sorted version of queue
     
 
-myNetwork = Graph("E")
-myNetwork.add_vertex(0,0,[True,False,False,False])
-
-
-myNetwork.Dijkstras()
-
-print(myNetwork())

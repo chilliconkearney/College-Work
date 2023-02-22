@@ -2,13 +2,14 @@ import time
 import os
 
 class logger:
+    loggingActive = True
+    
     def __init__(self, filename="Log.txt") -> None:
         self.filename = filename
         self.interval = 0.1
         self.init_time = time.time()
         self.log(index=0, lineStart="\n") # logs that it has initialised itself. 
         self.ObjectID = "logger"
-        self.loggingActive = True
 
     def __call__(self):
         properties = []
