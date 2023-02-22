@@ -7,14 +7,14 @@ class logger:
         self.interval = 0.1
         self.init_time = time.time()
         self.log(index=0, lineStart="\n") # logs that it has initialised itself. 
-        self.name = "logger"
+        self.ObjectID = "logger"
 
     def __call__(self):
         properties = []
         properties.append(self.filename)
         properties.append(str(self.interval))
         properties.append(str(self.init_time))
-        properties.append(self.name)
+        properties.append(self.ObjectID)
 
         return properties
 
@@ -29,21 +29,19 @@ class logger:
         self.object_increment = this_increment
         
         for item in args:
-            with open(str(this_increment) + " " + item.name, "w") as Tomb:
+            with open(str(this_increment) + " " + item.ObjectID, "w") as Tomb:
                 
-                i=0
-                for property in item():
+                for i in range(len(item())):
                     if i == 0:
                         Tomb.write("{}".format(item()[0]))
                     else:
                         Tomb.write("\n{}".format(item()[i]))
-                    i+=1
 
-                self.log("{} dumped".format(item.name))
-
+                self.log("{} dumped".format(item.ObjectID))
 
 
-    def retrieve(self, searchName, objName="", index=1): # retrieves an object from a text file
+
+    def retrieve(self, searchName, object, index=1): # retrieves an object from a text file
         with open(str(index) + " " + searchName, "r") as Tomb:
             
             properties = []
@@ -52,9 +50,7 @@ class logger:
                 properties.append(line.strip())
             
 
-            print(properties)
-
-            pass
+            return object.build(properties)
 
 
 
@@ -78,17 +74,25 @@ class logger:
 
 class test:
     def __init__(self) -> None:
-        self.name = "Test"
+        self.ObjectID = "Test"
         self.age = 12
         self.height = 185
 
     def __call__(self):
         properties = []
-        properties.append(self.name)
+        properties.append(self.ObjectID)
         properties.append(str(self.age))
         properties.append(str(self.height))
         
         return properties
+    
+    def build(properties):
+        T = test()
+        T.ObjectID = properties[0]
+        T.age = properties[1]
+        T.height = properties[2]
+
+        return T
     
 T1 = test()
 
@@ -96,4 +100,4 @@ Lumber = logger()
 
 Lumber.dump(T1)
 
-Lumber.retrieve("Test", index=3)
+print
