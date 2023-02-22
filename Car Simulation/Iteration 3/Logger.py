@@ -1,5 +1,4 @@
 import time
-import os
 
 class logger:
     loggingActive = True
@@ -20,7 +19,7 @@ class logger:
 
         return properties
 
-    def dump(self, *args): # dumps an object into a text file
+    def dump(self, args): # dumps an object into a text file
         #finding what increment is next and updating the file to store this increment. 
         with open("increment.txt", "r") as openFile:
             for line in openFile: pass
@@ -51,10 +50,7 @@ class logger:
             for line in Tomb.readlines():
                 properties.append(line.strip())
             
-
             return object.build(properties)
-
-
 
     def log(self, text="", index = -1, lineStart = ""): # used to log things. 
         presets = ["Logger Initialised",

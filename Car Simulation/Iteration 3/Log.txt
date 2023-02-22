@@ -1,0 +1,253 @@
+
+[0.0]Logger Initialised
+
+[0.0]Logger Initialised
+[4.22]Starting Search
+[5.39]Lost Line
+[8.529999999999999]Found Line
+[9.15]Lost Line
+[14.59]Check Line algorithm
+[34.24]Found Corner
+[34.36]Lost Line
+[36.62]Found Line
+[37.75]Lost Line
+[43.16]Check Line algorithm
+[62.92000000000001]Found Corner
+[64.26000000000001]Lost Line
+[69.71]Check Line algorithm
+[89.44000000000001]Found Corner
+[89.54000000000001]Lost Line
+[91.82]Found Line
+[92.34]Lost Line
+[97.89000000000001]Check Line algorithm
+[119.56]Found Dead End
+[119.67]Lost Line
+[121.55]Found Line
+[122.68]Lost Line
+[125.85]Found Line
+[126.47]Lost Line
+[131.9]Check Line algorithm
+[151.54]Found Corner
+[151.64]Lost Line
+[153.08]Found Line
+[153.7]Lost Line
+[156.86]Found Line
+[157.49]Lost Line
+[159.78]Found Line
+[160.3]Lost Line
+[161.74]Found End
+[161.81]G,1474,LeftF,1251,LeftE,938,LeftD,827,LeftC,554,LeftB,321,LeftA,0,Left
+[161.82]Search Complete
+
+[0.0]Logger Initialised
+[20.14]Starting Search
+[21.6]Lost Line
+[23.0]Found Line
+[23.41]Lost Line
+[24.84]Found Line
+[24.94]Lost Line
+
+[0.0]Logger Initialised
+[8.609999999999999]Starting Search
+[10.36]Lost Line
+[15.82]Check Line algorithm
+[35.42]Found Corner
+[36.44]Lost Line
+[41.87]Check Line algorithm
+[61.47]Found Corner
+[62.3]Lost Line
+[65.47000000000001]Found Line
+[66.18000000000001]Lost Line
+[71.65000000000001]Check Line algorithm
+[91.28]Found Corner
+[91.39000000000001]Lost Line
+[93.25000000000001]Found Line
+[93.67000000000001]Lost Line
+[96.87000000000001]Found Line
+[97.09000000000001]Lost Line
+[102.56]Check Line algorithm
+[124.19]Found Dead End
+[124.3]Lost Line
+[125.71]Found Line
+[127.14]Lost Line
+[132.56]Check Line algorithm
+[152.19]Found Corner
+[152.5]Lost Line
+[154.78]Found Line
+[155.4]Lost Line
+[157.67]Found Line
+[158.79]Lost Line
+[161.06]Found End
+[161.11]G,1504,LeftF,1224,LeftE,932,LeftD,837,LeftC,565,LeftB,354,LeftA,0,Left
+[161.13]Search Complete
+
+[0.0]Logger Initialised
+
+[0.0]Logger Initialised
+[9.029999999999999]Starting Search
+[9.65]Lost Line
+[12.83]Found Line
+[13.45]Lost Line
+[15.72]Found Line
+[16.55]Lost Line
+[21.99]Check Line algorithm
+[41.62]Found Corner
+[41.73]Lost Line
+[45.32]Found Line
+[45.85]Lost Line
+[48.12]Found Line
+[48.84]Lost Line
+[54.36]Check Line algorithm
+[73.93000000000001]Found Corner
+[75.28]Lost Line
+[80.69000000000001]Check Line algorithm
+[100.29]Found Corner
+[100.4]Lost Line
+[103.12]Found Line
+[103.54]Lost Line
+[108.98]Check Line algorithm
+[130.66]Found Dead End
+[130.77]Lost Line
+[132.17]Found Line
+[133.61]Lost Line
+[139.05]Check Line algorithm
+[158.68]Found Corner
+[158.79]Lost Line
+[161.06]Found Line
+[161.48]Lost Line
+[163.8]Found Line
+[164.72]Lost Line
+[167.02]Found Line
+[167.64]Lost Line
+[169.04]Found End
+[169.1]G,1462,LeftF,1203,LeftE,908,LeftD,817,LeftC,542,LeftB,331,LeftA,0,Left
+[169.11]Search Complete
+
+[0.0]Logger Initialised
+[21.77]Starting Search
+[23.23]Lost Line
+[25.06]Found Line
+[25.48]Lost Line
+[30.9]Check Line algorithm
+[50.47000000000001]Found Corner
+[50.58]Lost Line
+[54.16]Found Line
+[55.19]Lost Line
+[60.73]Check Line algorithm
+[80.39]Found Corner
+[80.48999999999999]Lost Line
+[82.76000000000002]Found Line
+[83.28000000000001]Lost Line
+[86.45999999999999]Found Line
+[87.49000000000001]Lost Line
+[92.94]Check Line algorithm
+[112.66]Found Corner
+[112.77]Lost Line
+[115.08]Found Line
+[115.6]Lost Line
+[121.09]Check Line algorithm
+[142.7]Found Dead End
+[142.81]Lost Line
+[144.21]Found Line
+[144.82]Lost Line
+[147.99]Found Line
+[148.82]Lost Line
+[151.12]Found Line
+[151.75]Lost Line
+[157.23]Check Line algorithm
+[176.81]Found Corner
+[176.92]Lost Line
+[178.32]Found Line
+[178.74]Lost Line
+[181.01]Found Line
+[182.04]Lost Line
+[183.43]Found End
+[183.45]Dijkstra's
+[183.51]G,1462,LeftF,1260,LeftE,927,LeftD,818,LeftC,545,LeftB,334,LeftA,0,Left
+[183.53]Network
+[183.54]Search Complete
+
+[0.0]Logger Initialised
+[19.67]Starting Search
+[21.42]Lost Line
+[26.86]Check Line algorithm
+
+[0.0]Logger Initialised
+[6.99]Starting Search
+[8.65]Lost Line
+[14.07]Check Line algorithm
+[33.76]Found Corner
+[33.87]Lost Line
+[35.73]Found Line
+[36.14]Lost Line
+[39.29]Found Line
+[39.8]Lost Line
+[43.0]Found Line
+[43.62]Lost Line
+[49.11]Check Line algorithm
+[68.76000000000001]Found Corner
+[70.1]Lost Line
+[75.50000000000001]Check Line algorithm
+[95.16]Found Corner
+[95.58]Lost Line
+[101.03]Check Line algorithm
+[122.79]Found Dead End
+[122.9]Lost Line
+[124.72]Found Line
+[125.44]Lost Line
+[127.73]Found Line
+[128.75]Lost Line
+[134.19]Check Line algorithm
+[153.71]Found Corner
+[153.82]Lost Line
+[156.14]Found Line
+[157.27]Lost Line
+[159.55]Found Line
+[160.18]Lost Line
+[161.6]Found End
+[161.62]Dijkstra's
+[161.67]G,1506,LeftF,1244,LeftE,930,LeftD,840,LeftC,566,LeftB,337,LeftA,0,Left
+[161.7]Network
+[161.71]A,['B', '', '', '']
+[161.72]B,['C', '', 'A', '']
+[161.73]C,['D', '', 'B', '']
+[161.74]D,['E', '', 'C', '']
+[161.76]E,['F', '', 'D', '']
+[161.77]F,['G', '', 'E', '']
+[161.78]G,['', '', 'F', '']
+[161.79]Search Complete
+
+[0.0]Logger Initialised
+[22.7]Starting Search
+[24.35]Lost Line
+[29.8]Check Line algorithm
+[49.54000000000001]Found Corner
+[50.67]Lost Line
+[56.14000000000001]Check Line algorithm
+[75.64]Found Corner
+[75.75]Lost Line
+[78.47]Found Line
+[79.81000000000001]Lost Line
+[85.26999999999999]Check Line algorithm
+[104.85]Found Corner
+[104.97]Lost Line
+[107.24]Found Line
+[107.66]Lost Line
+[113.12]Check Line algorithm
+[134.71]Found Dead End
+[134.82]Lost Line
+[136.66]Found Line
+[137.89]Lost Line
+[141.11]Found Line
+[141.53]Lost Line
+[146.02]Found Line
+[146.34]Lost Line
+[151.79]Check Line algorithm
+[171.34]Found Corner
+[171.45]Lost Line
+[173.31]Found Line
+[174.14]Lost Line
+[177.33]Found Line
+[177.74]Lost Line
+[179.14]Found End
+[179.16]Dijkstra's

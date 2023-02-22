@@ -40,7 +40,7 @@ class Menu: # used for the different submenus in the UI
                 screen.print(self.titles[i])
 
 class car:
-    maze = Graphing.Graph("D") # creates a graph with final vertex Z
+    
     
     def __init__(self):
         self.ev3 = EV3Brick()
@@ -55,6 +55,8 @@ class car:
         self.colsense = ColorSensor(Port.S4) # Left out as wont work right now, FIX THIS!!!!!
         self.speed = 200
         self.driver.settings(straight_speed=self.speed) # sets the cars speed to 200mm /s
+
+        self.maze = Graphing.Graph("D", self.screen) # creates a graph with final vertex Z
 
         self.ObjectID = "car"
     
@@ -209,10 +211,12 @@ class car:
                 
                 if "Left" in directions:
                     self.driver.turn(-90)
+                    dirfacing -= 1
                     evLogger.log("Found Corner")
                     
                 elif "Right" in directions:
                     self.driver.turn(90)
+                    dirfacing += 1
                     evLogger.log("Found Corner")
                     
                 elif "Back" in directions: 
@@ -220,6 +224,7 @@ class car:
                     # before this vertex is going to be the next vertex.
                     # Hence, needs some condition to know it needs to 
                     # navigate to another vertex that isnt complete.
+                    dirfacing += 2
                     self.driver.turn(180)
                     evLogger.log("Found Dead End")
                     
@@ -227,10 +232,19 @@ class car:
         abs_directions[(dirfacing+2)%4] = True
         self.maze.end = chr(self.maze.label_index)
         self.maze.add_vertex(dirfacing, self.driver.distance(), abs_directions)
+        
         try:
+            evLogger.log("Dijkstra's")
             evLogger.log(self.maze.Dijkstras())
+
         except Exception as e:
             evLogger.log(e)
+
+       
+        evLogger.log("Network")
+        for item in self.maze.Permanent:
+            evLogger.log("{},{}".format(item.label, item.adjacencyLabels))
+
         evLogger.log("Search Complete") # logs that the search algorithm is done. 
 
     def check_line(self): # finds which directions are possible to turn. 
@@ -254,7 +268,7 @@ class car:
 
         return possible_dirs
 
-    def RunSolved(self, maze_index): # will take any of the previously solved mazes, and execute the path. 
+    def RunSolved(self): # will take any of the previously solved mazes, and execute the path. 
         pass
 
 class main: # will hold the main section of the program. useful for dropping in different main loops

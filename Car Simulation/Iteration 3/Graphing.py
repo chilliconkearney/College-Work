@@ -35,13 +35,16 @@ class Vertex():
         pass
             
 class Graph():
-    def __init__(self, end_label):
+    def __init__(self, end_label, screen):
         self.network = []
         self.label_index = 65 # 65 in unicode is A, works as an offset
         self.end = end_label
         self.nullVertex = Vertex("*")
         self.finalPath = ""
         self.finalLength = math.inf
+        self.Permanent = []
+        self.screen = screen
+        
 
     def __call__(self):
         properties = []
@@ -84,19 +87,28 @@ class Graph():
         self.label_index += 1 # increments the label by 1 e.g A -> B
 
     def Dijkstras(self):
-        Queue = self.network
-        Permanent = []
+        
+        self.fixGraph()
+        self.screen.print("Graph Fixed")
+
+        Queue = []
+        for item in self.network:
+            Queue.append(item)
+        
         
         Queue[0].totalweight = 0 # sets the initial vertex weight to 0
         end_vertex = self.find_vertex(Queue, self.end)
 
         while end_vertex in Queue: # the main loop which checks all the vertices
+            
+            self.screen.print("Doing Dijkstra's")
+            
             self.bubble(Queue) # sorts the queue
             
             current_vertex = Queue.pop(0) # similar to the dequeue in static languages
             current_vertex.permanent = True
 
-            Permanent.append(current_vertex)
+            self.Permanent.append(current_vertex)
 
             for i in range(0,4): # iterates from 0 to 3, stops when at 4
                 dirVertex = self.find_vertex(Queue,current_vertex.adjacencyLabels[i]) # finds the vertex in the direction
@@ -107,7 +119,7 @@ class Graph():
                         dirVertex.previousDir = i
 
         # Output the final path to follow
-        self.finalPath = self.findPath(Permanent, self.end)
+        self.finalPath = self.findPath(self.Permanent, self.end)
         return self.finalPath
 
     def findPath(self, final_list, curlabel, output = ""): # traces the path back to the start
@@ -138,4 +150,28 @@ class Graph():
 
             return queue # returns the sorted version of queue
     
+    def fixGraph(self): # fixes the graph so that vertices are not 'hopped' over
+        for vert_i in self.network:
+            for vert_j in self.network:
+                for i in range(0,4):
+                    if vert_i.label != vert_j.label and vert_i.adjacencyLabels[i] == vert_j.adjacencyLabels[i] and len(vert_j.adjacencyLabels[i])>0:
+                        self.screen.print("Changing Layout")
+                        
+                        if vert_i.adjacencyWeights[i] > vert_j.adjacencyWeights[i]:
+                            firstVert = vert_i
+                            secondVert = vert_j
+                            thirdVert = self.find_vertex(self.network, firstVert.adjacencyLabels[i])
+                        
+                        elif vert_i.adjacencyWeights[i] > vert_j.adjacencyWeights[i]:
+                            firstVert = vert_j
+                            secondVert = vert_i
+                            thirdVert = self.find_vertex(self.network, firstVert.adjacencyLabels[i])
 
+                        firstVert.adjacencyLabels[i] = secondVert.label
+                        firstVert.adjacencyWeights[i] = firstVert.adjacencyWeights[i] - secondVert.adjacencyWeights[i]
+
+                        secondVert.adjacencyLabels[(i+2)%4] = firstVert.label
+                        secondVert.adjacencyLabels[(i+2)%4] = firstVert.adjacencyWeights[i]
+
+                        thirdVert.adjacencyLabels[(i+2)%4] = secondVert.label
+                        thirdVert.adjacencyWeights[(i+2)%4] = secondVert.adjacencyWeights[i]
