@@ -110,6 +110,7 @@ class car:
 
 
     def SetMotorSpeed(self): # increases or decreases the speed of the motor
+        time.sleep(0.5)
         while Button.CENTER not in self.buttons.pressed(): # if the center button is pressed, take this as enter and exit the subroutine
             time.sleep(0.05)
             self.screen.clear()
@@ -125,10 +126,11 @@ class car:
     def SetLogType(self): # toggles logging on/off
         self.screen.clear()
         evLogger.loggingActive = not evLogger.loggingActive
-        self.screen.print("Logging toggled {}".format(evLogger.loggingActive))
+        self.screen.print("Logging toggled \n{}".format(evLogger.loggingActive))
         time.sleep(5)
 
     def SetLogInterval(self):
+        time.sleep(0.5)
         while Button.CENTER not in self.buttons.pressed(): # if the center button is pressed, take this as enter and exit the subroutine
             time.sleep(0.05)
             self.screen.clear()
@@ -137,7 +139,7 @@ class car:
                 evLogger.interval += 0.1
             elif Button.DOWN in self.buttons.pressed(): # decrease the speed if the down button is pressed
                 evLogger.interval -= 0.1
-        evLogger.log("Logger interval set to {}".format(evLogger.interval))
+        evLogger.log("Logger interval \nset to {}".format(evLogger.interval))
         time.sleep(5)
 
     def RunAll(self): # runs both of the subroutines: hence will search the maze, then will traverse the maze back and run the complete solved maze
