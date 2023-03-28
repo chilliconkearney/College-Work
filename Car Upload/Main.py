@@ -39,11 +39,9 @@ class Menu: # used for the different submenus in the UI
             else:
                 screen.print(self.titles[i])
 
-class car:
-    
-    
+class car: #
     def __init__(self):
-        self.ev3 = EV3Brick()
+        self.ev3 = EV3Brick() 
         self.screen = self.ev3.screen
         self.buttons = self.ev3.buttons
 
